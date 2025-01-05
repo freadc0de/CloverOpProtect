@@ -32,7 +32,7 @@ messages:
     - '&#FF0000You cannot send messages until you log in.'
 
   boss-bar-message:
-    - '&ePlease log in using /pass <password>'
+    - '&eYou have {time} seconds left to login'
 
   timeout-kick-message:
     - '&cYou did not log in in time. You have been kicked!'

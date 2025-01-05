@@ -49,7 +49,7 @@ public class PlayerEventHandler implements Listener {
 
                 // Создаём босс-бар
                 BossBar bossBar = Bukkit.createBossBar(
-                        ChatColor.translateAlternateColorCodes('&', plugin.getBossBarMessage()),
+                        replaceTimePlaceholder(plugin.getBossBarMessage(), 30),
                         BarColor.YELLOW,
                         BarStyle.SOLID
                 );
@@ -114,7 +114,7 @@ public class PlayerEventHandler implements Listener {
                     } else {
                         // Обновляем прогресс и текст босс-бара
                         bossBar.setProgress(timeLeft / (double) loginTime);
-                        bossBar.setTitle(ChatColor.translateAlternateColorCodes('&', plugin.getBossBarMessage()) + " " + timeLeft + "s");
+                        bossBar.setTitle(replaceTimePlaceholder(plugin.getBossBarMessage(), timeLeft));
                         timeLeft--;
                         loginTimers.put(player, timeLeft);
                     }
@@ -133,5 +133,9 @@ public class PlayerEventHandler implements Listener {
             bossBar.removeAll();
             bossBars.remove(player);
         }
+    }
+
+    private String replaceTimePlaceholder(String message, int timeLeft) {
+        return ChatColor.translateAlternateColorCodes('&', message.replace("{time}", String.valueOf(timeLeft)));
     }
 }
