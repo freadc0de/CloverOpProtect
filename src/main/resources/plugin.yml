@@ -1,5 +1,5 @@
 name: CloverOpProtector
-version: 1.0
+version: 1.3
 author: fread
 main: com.fread.cloverOpProtector.AdminProtectionPlugin
 api-version: 1.16
