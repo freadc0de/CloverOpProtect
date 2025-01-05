@@ -4,16 +4,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class AdminProtectionPlugin extends JavaPlugin {
 
-    private LoginManager loginManager;
-
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        loginManager = new LoginManager(this);
+
+        LoginManager loginManager = new LoginManager(this);
 
         getServer().getPluginManager().registerEvents(new PlayerEventHandler(this, loginManager), this);
         getServer().getPluginManager().registerEvents(new ChatHandler(this, loginManager), this);
-        getCommand("pass").setExecutor(new LoginCommandExecutor(this, loginManager));
+
+        if (getCommand("pass") != null) {
+            getCommand("pass").setExecutor(new LoginCommandExecutor(this, loginManager));
+        } else {
+            getLogger().severe("Command 'pass' is not defined in plugin.yml!");
+        }
 
         getLogger().info("AdminProtection enabled.");
     }

@@ -2,7 +2,6 @@ package com.fread.cloverOpProtector;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +10,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerEventHandler implements Listener {
+
     private final AdminProtectionPlugin plugin;
     private final LoginManager loginManager;
 
@@ -25,10 +25,14 @@ public class PlayerEventHandler implements Listener {
         if (player.isOp()) {
             if (loginManager.isIpAuthorized(player)) {
                 loginManager.logIn(player);
-                player.sendMessage(plugin.getMessage("already-logged-in"));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getMessage("already-logged-in")));
             } else {
                 freezePlayer(player);
-                player.sendTitle(plugin.getMessage("login-required-title"), plugin.getMessage("login-required-subtitle"), 10, 70, 20);
+                player.sendTitle(
+                        ChatColor.translateAlternateColorCodes('&', plugin.getMessage("login-required-title")),
+                        ChatColor.translateAlternateColorCodes('&', plugin.getMessage("login-required-subtitle")),
+                        10, 70, 20
+                );
             }
         }
     }
@@ -42,11 +46,7 @@ public class PlayerEventHandler implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if (player.isOp() && !loginManager.isLoggedIn(player)) {
-            Location from = event.getFrom();
-            Location to = event.getTo();
-            if (from != null && to != null && (from.getX() != to.getX() || from.getY() != to.getY() || from.getZ() != to.getZ())) {
-                event.setTo(from);
-            }
+            event.setCancelled(true);
         }
     }
 
