@@ -38,6 +38,11 @@ public class AdminProtectionPlugin extends JavaPlugin {
         return translateHexColorCodes(rawMessage);
     }
 
+    public String getBossBarMessage() {
+        return translateHexColorCodes(String.join("\n", getConfig().getStringList("messages.boss-bar-message")));
+    }
+
+
     public static String translateHexColorCodes(String message) {
         Pattern hexPattern = Pattern.compile("(?i)&#([A-Fa-f0-9]{6})");
         Matcher matcher = hexPattern.matcher(message);
