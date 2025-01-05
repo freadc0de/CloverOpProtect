@@ -5,6 +5,7 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -27,6 +28,7 @@ public class PlayerEventHandler implements Listener {
                 loginManager.logIn(player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getMessage("already-logged-in")));
             } else {
+                loginManager.saveAndClearInventory(player); // Сохраняем и очищаем инвентарь
                 freezePlayer(player);
                 player.sendTitle(
                         ChatColor.translateAlternateColorCodes('&', plugin.getMessage("login-required-title")),
@@ -47,6 +49,17 @@ public class PlayerEventHandler implements Listener {
         Player player = event.getPlayer();
         if (player.isOp() && !loginManager.isLoggedIn(player)) {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDamage(EntityDamageEvent event) {
+        // Проверяем, что урон получает игрок
+        if (event.getEntity() instanceof Player player) {
+            // Если игрок ещё не авторизован, отменяем урон
+            if (player.isOp() && !loginManager.isLoggedIn(player)) {
+                event.setCancelled(true);
+            }
         }
     }
 
