@@ -1,0 +1,9 @@
+name: CloverOpProtector
+version: 1.0
+author: fread
+main: com.fread.cloverOpProtector.AdminProtectionPlugin
+api-version: 1.16
+commands:
+  pass:
+    description: Log in as admin.
+    aliases: [adminlogin, protect, pro, log, l]

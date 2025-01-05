@@ -1,0 +1,29 @@
+admin-password: "defaultPassword"
+
+messages:
+  already-logged-in: |
+    &#00FF00You are already logged in based on your IP.
+
+  login-required-title: |
+    &#FF0000Login Required
+
+  login-required-subtitle: |
+    &#808080Use /pass <password>
+
+  usage: |
+    &#FF0000Usage: /pass <password>
+
+  login-successful-title: |
+    &#00FF00Login Successful
+
+  login-successful-subtitle: |
+  
+
+  login-successful-message: |
+    &#00FF00You have successfully logged in.
+
+  must-log-in: |
+    &#FF0000You must log in first using /pass <password>.
+
+  incorrect-password: |
+    &#FF0000Incorrect password
