@@ -12,6 +12,7 @@ public class AdminProtectionPlugin extends JavaPlugin {
         loginManager = new LoginManager(this);
 
         getServer().getPluginManager().registerEvents(new PlayerEventHandler(this, loginManager), this);
+        getServer().getPluginManager().registerEvents(new ChatHandler(this, loginManager), this);
         getCommand("pass").setExecutor(new LoginCommandExecutor(this, loginManager));
 
         getLogger().info("AdminProtection enabled.");
@@ -24,5 +25,9 @@ public class AdminProtectionPlugin extends JavaPlugin {
 
     public String getAdminPassword() {
         return getConfig().getString("admin-password", "defaultPassword");
+    }
+
+    public String getMessage(String key) {
+        return String.join("\n", getConfig().getStringList("messages." + key));
     }
 }

@@ -23,6 +23,7 @@ public class LoginManager {
     public void logIn(Player player) {
         loggedInPlayers.put(player.getUniqueId(), true);
         ipLoginTimestamps.put(getPlayerIp(player), System.currentTimeMillis());
+        player.removePotionEffect(org.bukkit.potion.PotionEffectType.BLINDNESS);
     }
 
     public void logOut(Player player) {

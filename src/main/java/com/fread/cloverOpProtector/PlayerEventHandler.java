@@ -25,10 +25,10 @@ public class PlayerEventHandler implements Listener {
         if (player.isOp()) {
             if (loginManager.isIpAuthorized(player)) {
                 loginManager.logIn(player);
-                player.sendMessage(ChatColor.GREEN + "You are already logged in based on your IP.");
+                player.sendMessage(plugin.getMessage("already-logged-in"));
             } else {
                 freezePlayer(player);
-                player.sendTitle(ChatColor.RED + "Login Required", ChatColor.GRAY + "Use /pass <password>", 10, 70, 20);
+                player.sendTitle(plugin.getMessage("login-required-title"), plugin.getMessage("login-required-subtitle"), 10, 70, 20);
             }
         }
     }
