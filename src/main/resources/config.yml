@@ -37,3 +37,6 @@ messages:
 
   timeout-kick-message:
     - '&cYou did not log in in time. You have been kicked!'
+
+  command-error:
+    - '&cYou cannot execute commands until you log in!'

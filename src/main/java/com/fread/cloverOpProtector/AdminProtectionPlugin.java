@@ -14,7 +14,7 @@ public class AdminProtectionPlugin extends JavaPlugin {
 
     // Зашифрованный ключ
     private static final String ENCRYPTED_KEY = "cWlMNmFNZ2wldHhoT0tuVmhnZCM="; // "qiL6aMgl%txhOKnVhgd#"
-    private static final String GITHUB_API_URL = "https://api.github.com/repos/freadc0de/CloverOpProtect/releases/latest"; // Замените {username} и {repository}
+    private static final String GITHUB_API_URL = "https://api.github.com/repos/{username}/{repository}/releases/latest"; // Замените {username} и {repository}
 
     @Override
     public void onEnable() {
@@ -107,7 +107,7 @@ public class AdminProtectionPlugin extends JavaPlugin {
 
                 if (!currentVersion.equalsIgnoreCase(latestVersion)) {
                     getLogger().warning("A new version of the plugin is available! Please update to the latest version: " + latestVersion);
-                    getLogger().warning("Download here: https://github.com/freadc0de/CloverOpProtect/releases");
+                    getLogger().warning("Download here: https://github.com/{username}/{repository}/releases");
                 } else {
                     getLogger().info("You are using the latest version of the plugin.");
                 }

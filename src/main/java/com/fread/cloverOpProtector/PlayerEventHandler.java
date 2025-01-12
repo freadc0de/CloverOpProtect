@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -86,6 +87,22 @@ public class PlayerEventHandler implements Listener {
         if (event.getEntity() instanceof Player player) {
             if (player.isOp() && !loginManager.isLoggedIn(player)) {
                 event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+
+        // Проверяем, авторизован ли игрок
+        if (player.isOp() && !loginManager.isLoggedIn(player)) {
+            String command = event.getMessage().toLowerCase();
+
+            // Разрешённые команды для авторизации
+            if (!command.startsWith("/pass") && !command.startsWith("/adminlogin")) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getMessage("command-error")));
             }
         }
     }
